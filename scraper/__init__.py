@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY="dev",
@@ -17,8 +17,7 @@ def create_app():
     except OSError:
         pass
 
-    @app.route("/")
-    def index():
-        return "hi"
+    from . import ui
+    app.register_blueprint(ui.bp)
 
     return app

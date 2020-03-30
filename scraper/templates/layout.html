@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=fallbacks" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<nav>
+    <h3>Ceneo Scraper</h3>
+    <a href="{{ url_for('ui.index') }}" class="{{ 'active' if url_for(request.endpoint) == '/' }}"
+        >Strona główna</a
+    >
+    <a href="{{ url_for('ui.extract') }}" class="{{ 'active' if url_for(request.endpoint) == '/extract' }}"
+        >Ekstrakcja opinii</a
+    >
+    <a {#href="{{ url_for('ui.products') }}"#} class="{{ 'active' if url_for(request.endpoint) == '/products' }}"
+        >Lista produktów</a
+    >
+    <a {#href="{{ url_for('ui.about') }}"#} class="{{ 'active' if url_for(request.endpoint) == '/about' }}"
+        >O autorze</a
+    >
+</nav>
+{% if g.error %}
+    <div id="error">
+        <button onclick="hideError(this)">+</button>
+        <h4>{{ g.error }}</h4>
+    </div>
+
+    <script>
+        function hideError(e) {
+            e.parentElement.remove();
+        }
+    </script>
+{% endif %}
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>

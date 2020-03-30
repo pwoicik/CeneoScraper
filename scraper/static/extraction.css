@@ -1,0 +1,31 @@
+#extraction {
+    margin: auto 0;
+    width: 100%;
+    text-align: center;
+}
+
+#search-forms {
+    margin-top: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-form > * {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-form > input {
+    width: 400px;
+}
+
+.search-form > button {
+    width: fit-content;
+}

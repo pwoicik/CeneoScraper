@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div id="extraction">
+        <h1>Wyszukaj produkt po nazwie lub wydobądź dane o produkcie z numeru ID</h1>
+
+        <div id="search-forms">
+            <form class="search-form" method="get">
+                <label for="product-name">Nazwa produktu: </label>
+                <input type="search" id="product-name" name="name" required/>
+                <button>Szukaj</button>
+            </form>
+            <form class="search-form" method="get">
+                <label for="product-id">ID produktu: </label>
+                <input type="search" id="product-id" name="id" required/>
+                <button>Ekstrahuj</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
