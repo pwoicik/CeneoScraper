@@ -13,12 +13,12 @@ from flask import (
 bp = Blueprint("ui", __name__, url_prefix="/")
 
 
-@bp.route("/", methods=["GET"])
+@bp.route("/")
 def index() -> Response:
     return render_template("index.html")
 
 
-@bp.route("/extract", methods=["GET"])
+@bp.route("/extract")
 def extract() -> Response:
     if "id" in request.args:
         url = f"https://www.ceneo.pl/{request.args['id']}"
@@ -34,12 +34,12 @@ def extract() -> Response:
     return render_template("extract.html")
 
 
-@bp.route("/product/<product_id>", methods=["GET"])
-def product(product_id: str) -> str:
-    return product_id
+@bp.route("/product/<product_id>")
+def product(product_id: str) -> Response:
+    return render_template("product.html")
 
 
-@bp.route("/search/<product_name>", methods=["GET"])
+@bp.route("/search/<product_name>")
 def search(product_name: str) -> str:
     product_name = sub(r"\s+", "+", product_name)
     products = requests.get(f"https://www.ceneo.pl/;szukaj-{product_name}")
