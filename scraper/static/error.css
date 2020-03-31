@@ -1,0 +1,26 @@
+#error {
+    position: relative;
+    margin-top: 50px;
+    padding: 0.3rem 0;
+    text-align: center;
+    background-color: rgba(255, 23, 0, 0.77);
+}
+
+#error > button {
+    background: none;
+    display: inline;
+    padding: 0;
+    position: absolute;
+    right: 1rem;
+    bottom: 0.4rem;
+    transform: rotate(45deg) scale(2.2, 2.2);
+    color: black;
+}
+
+#error > button:hover {
+    cursor: pointer;
+}
+
+#error > button:focus {
+    outline: none;
+}
