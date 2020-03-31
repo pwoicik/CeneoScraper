@@ -9,6 +9,8 @@ from flask import (
     Response,
     url_for,
 )
+from .extraction.product import Product
+
 
 bp = Blueprint("ui", __name__, url_prefix="/")
 
@@ -36,11 +38,22 @@ def extract() -> Response:
 
 @bp.route("/product/<product_id>")
 def product(product_id: str) -> Response:
-    return render_template("product.html")
+    prod = Product(product_id).__dict__
+    return render_template("product.html", product=prod)
 
 
 @bp.route("/search/<product_name>")
 def search(product_name: str) -> str:
     product_name = sub(r"\s+", "+", product_name)
-    products = requests.get(f"https://www.ceneo.pl/;szukaj-{product_name}")
+    # products = requests.get(f"https://www.ceneo.pl/;szukaj-{product_name}")
     return product_name
+
+
+@bp.route("/products")
+def products():
+    return "products"
+
+
+@bp.route("/about")
+def about():
+    return "about"

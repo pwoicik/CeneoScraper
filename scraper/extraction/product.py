@@ -10,10 +10,11 @@ class Product:
         self.id = product_id
         self.url = f"https://www.ceneo.pl/{self.id}"
 
-        with BeautifulSoup(get(self.url).content, "html.parser") as page:
-            self.name = page.select("h1.product-name")[0].text
-            self.img_url = page.select("a.js_image-preview > img")[0]["src"]
-            self.score = page.select("span.product-score")[0]["content"]
+        page_res = get(self.url)
+        page = BeautifulSoup(page_res.content, "html.parser")
+        self.name = page.select("h1.product-name")[0].text
+        self.img_url = page.select("a.js_image-preview > img")[0]["src"]
+        self.score = page.select("span.product-score")[0]["content"]
 
         self.reviews = self.__get_reviews()
 
