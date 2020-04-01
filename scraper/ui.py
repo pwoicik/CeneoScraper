@@ -1,5 +1,5 @@
-import requests
 from re import sub
+
 from flask import (
     Blueprint,
     g,
@@ -9,8 +9,10 @@ from flask import (
     Response,
     url_for,
 )
-from .extraction.product import Product
-from . import models
+import requests
+
+from .models import db, Product
+from . import extraction
 
 
 bp = Blueprint("ui", __name__, url_prefix="/")
@@ -39,9 +41,12 @@ def extract() -> Response:
 
 @bp.route("/product/<product_id>")
 def product(product_id: str) -> Response:
-    prod = models.Product.query.filter(models.Product.id == int(product_id))
-    if not product:
-        prod = Product(product_id).__dict__
+    pid = int(product_id)
+    prod = Product.query.filter(Product.id == pid).first()
+    if not prod:
+        prod = extraction.extract(pid)
+        db.session.add(prod)
+        db.session.commit()
 
     return render_template("product.html", product=prod)
 

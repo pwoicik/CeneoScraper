@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {{ product }}
+    {{ product.name }}
     {% for review in product.reviews %}
         <p>{{ review.__dict__ }}</p>
     {% endfor %}

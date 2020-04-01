@@ -12,7 +12,6 @@ class Product(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
     author = db.Column(db.Text, nullable=False)
     is_recommending = db.Column(db.Boolean, nullable=False)
     score = db.Column(db.Float)
@@ -24,3 +23,4 @@ class Review(db.Model):
     content = db.Column(db.Text, nullable=False)
     pros = db.Column(db.Text)
     cons = db.Column(db.Text)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
