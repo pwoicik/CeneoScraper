@@ -24,7 +24,8 @@ def create_app() -> Flask:
     db.init_app(app)
 
     with app.app_context():
-        from . import ui
+        from . import ui, db_manip
+        app.register_blueprint(db_manip.bp)
         app.register_blueprint(ui.bp)
 
         db.create_all()

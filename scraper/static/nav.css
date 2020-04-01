@@ -5,8 +5,9 @@ nav {
     display: flex;
     height: 50px;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 1.2rem;
     background-color: white;
+    transition: 0.5s ease;
 }
 
 nav > a {

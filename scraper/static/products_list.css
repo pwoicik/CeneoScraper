@@ -1,0 +1,73 @@
+#products-list {
+    align-self: center;
+}
+
+#page-header {
+    margin-bottom: 1.3rem;
+}
+
+#products-list > table {
+    width: max-content;
+}
+
+#products-list tr {
+    vertical-align: top;
+}
+
+#products-list tr:nth-last-of-type(2n + 1) > td {
+    padding-bottom: 3rem;
+    max-width: 30vw;
+}
+
+.img-col {
+    padding-right: 2.5rem;
+}
+
+.product-link {
+    padding-bottom: 2rem;
+}
+
+.score > span {
+    font-weight: 600;
+}
+
+.list-header {
+    padding-bottom: 0.5rem;
+}
+
+.pros-list {
+    margin-left: 1rem;
+    color: forestgreen;
+}
+
+.cons-list {
+    margin-left: 1rem;
+    color: crimson;
+}
+
+.options {
+    text-align: right;
+}
+
+.options > button {
+    background: none;
+    padding: 0;
+    outline: none;
+    margin-left: 1rem;
+}
+
+.options > button:hover {
+    cursor: pointer;
+}
+
+.download-button > svg {
+    width: 25px;
+    height: auto;
+}
+
+.delete-button > svg {
+    width: 20px;
+    height: auto;
+    position: relative;
+    bottom: 0.2rem;
+}

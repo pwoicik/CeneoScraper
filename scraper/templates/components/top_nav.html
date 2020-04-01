@@ -1,0 +1,23 @@
+<nav>
+    <h3>Ceneo Scraper</h3>
+    <a href="{{ url_for('ui.index') }}" class="{{ 'active' if request.endpoint == 'ui.index' }}"
+        >Strona główna</a
+    >
+    <a href="{{ url_for('ui.extract') }}" class="{{ 'active' if request.endpoint == 'ui.extract' }}"
+        >Ekstrakcja opinii</a
+    >
+    <a href="{{ url_for('ui.products_list') }}" class="{{ 'active' if request.endpoint == 'ui.products_list' }}"
+        >Lista produktów</a
+    >
+    <a href="{{ url_for('ui.about') }}" class="{{ 'active' if request.endpoint == 'ui.about' }}"
+        >O autorze</a
+    >
+</nav>
+
+<script>
+    const nav = document.querySelector("nav");
+
+    window.onscroll = function() {
+        nav.style.boxShadow = window.scrollY > 0 ? "1px 1px 6px rgba(0, 0, 0, 0.3)" : "0 0 0 transparent";
+    }
+</script>

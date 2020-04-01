@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div id="products-list">
+
+        {% if not products %}
+            <h1 id="info-empty-header">Brak zapisanych produktów</h1>
+            <style>
+                #products-list {
+                    text-align: center;
+                    margin: auto 0;
+                }
+            </style>
+
+        {% else %}
+            <h1 id="page-header">Zapisane produkty:</h1>
+            <table>
+                {% for product in products %}
+                    <tr>
+                        <td rowspan="2" class="img-col">
+                            <img src="{{ product.img_url }}" alt="zdjęcie produktu"/>
+                        </td>
+                        <td class="product-link">
+                            <h2>
+                                <a href="{{ url_for("ui.product", pid=product.id) }}">{{ product.name }}</a>
+                            </h2>
+                            <h4 class="score">
+                                {% if product.score %}
+                                    <span>ocena:</span> {{ product.score }} / 5
+                                {% else %}
+                                    Produkt bez oceny
+                                {% endif %}
+                            </h4>
+                        </td>
+                        <td class="options">
+                            <button
+                                    class="download-button"
+                                    data-pid="{{ product.id }}"
+                                    onclick="downloadProductInfo(this)"
+                                    title="Pobierz w pliku .json"
+                            >
+                                {% include "components/download_icon.html" %}
+                            </button>
+                            <button
+                                    class="delete-button"
+                                    data-pid="{{ product.id }}"
+                                    onclick="sendDeleteRequest(this)"
+                                    title="Usuń produkt z zapisanych"
+                            >
+                                {% include "components/delete_icon.html" %}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% if product.pros %}
+                                <h4 class="list-header">Zalety:</h4>
+                                <ul class="pros-list">
+                                    {% for pro in product.pros %}
+                                        <li>{{ pro }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if product.cons %}
+                                <h4 class="list-header">Wady:</h4>
+                                <ul class="cons-list">
+                                    {% for con in product.cons %}
+                                        <li>{{ con }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <script>
+                function downloadProductInfo(button) {
+                    const pid = button.getAttribute("data-pid");
+                    fetch(`/db/product/${pid}`)
+                        .then(res => res.json())
+                        .then(json => {
+                            const file = new Blob(
+                                [JSON.stringify(json, null, 4)],
+                                {type: "application/json;charset=utf-8"}
+                            );
+
+                            const virtual_btn = document.createElement('a');
+                            virtual_btn.href = URL.createObjectURL(file);
+                            virtual_btn.download = `${pid}.json`;
+                            virtual_btn.click();
+                        });
+                }
+
+                function sendDeleteRequest(button) {
+                    const pid = button.getAttribute("data-pid");
+                    fetch(`/db/product/${pid}`, {method: "DELETE"}).then(_ => location.reload());
+                }
+            </script>
+        {% endif %}
+    </div>
+{% endblock %}
