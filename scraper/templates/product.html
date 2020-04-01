@@ -2,4 +2,7 @@
 
 {% block content %}
     {{ product }}
+    {% for review in product.reviews %}
+        <p>{{ review.__dict__ }}</p>
+    {% endfor %}
 {% endblock %}

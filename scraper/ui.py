@@ -10,6 +10,7 @@ from flask import (
     url_for,
 )
 from .extraction.product import Product
+from . import models
 
 
 bp = Blueprint("ui", __name__, url_prefix="/")
@@ -38,7 +39,10 @@ def extract() -> Response:
 
 @bp.route("/product/<product_id>")
 def product(product_id: str) -> Response:
-    prod = Product(product_id).__dict__
+    prod = models.Product.query.filter(models.Product.id == int(product_id))
+    if not product:
+        prod = Product(product_id).__dict__
+
     return render_template("product.html", product=prod)
 
 

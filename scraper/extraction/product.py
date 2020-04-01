@@ -7,14 +7,16 @@ from typing import Generator
 
 class Product:
     def __init__(self, product_id: str):
-        self.id = product_id
+        self.id = int(product_id)
         self.url = f"https://www.ceneo.pl/{self.id}"
 
         page_res = get(self.url)
         page = BeautifulSoup(page_res.content, "html.parser")
         self.name = page.select("h1.product-name")[0].text
         self.img_url = page.select("a.js_image-preview > img")[0]["src"]
-        self.score = page.select("span.product-score")[0]["content"]
+
+        score = page.select("span.product-score")
+        self.score = None if len(score) < 1 else float(score[0]["content"].replace(",", "."))
 
         self.reviews = self.__get_reviews()
 
