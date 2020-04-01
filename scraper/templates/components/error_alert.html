@@ -1,0 +1,12 @@
+{% if g.error %}
+    <div id="error-alert">
+        <h4>{{ g.error }}</h4>
+        <button onclick="hideError(this)">+</button>
+    </div>
+
+    <script>
+        function hideError(e) {
+            e.parentElement.remove();
+        }
+    </script>
+{% endif %}

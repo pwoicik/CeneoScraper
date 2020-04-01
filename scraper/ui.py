@@ -1,4 +1,5 @@
 from re import sub
+from typing import List
 
 from flask import (
     Blueprint,
@@ -11,8 +12,9 @@ from flask import (
 )
 import requests
 
-from .models import db, Product
 from . import extraction
+from .models import db, Product
+from .utils import format_pros_and_cons
 
 
 bp = Blueprint("ui", __name__, url_prefix="/")
@@ -26,22 +28,22 @@ def index() -> Response:
 @bp.route("/extract")
 def extract() -> Response:
     if "id" in request.args:
-        url = f"https://www.ceneo.pl/{request.args['id']}"
+        pid = int(request.args["id"])
+        url = f"https://www.ceneo.pl/{pid}"
         product_req = requests.get(url)
 
         if product_req.status_code == 404:
             g.error = "Nie znaleziono przedmiotu o podanym ID"
         else:
-            return redirect(url_for("ui.product", product_id=request.args["id"]))
+            return redirect(url_for("ui.product", pid=pid))
     elif "name" in request.args:
         return redirect(url_for("ui.search", product_name=request.args["name"]))
 
     return render_template("extract.html")
 
 
-@bp.route("/product/<product_id>")
-def product(product_id: str) -> Response:
-    pid = int(product_id)
+@bp.route("/product/<int:pid>")
+def product(pid: int) -> Response:
     prod = Product.query.filter(Product.id == pid).first()
     if not prod:
         prod = extraction.extract(pid)
@@ -59,8 +61,14 @@ def search(product_name: str) -> str:
 
 
 @bp.route("/products")
-def products():
-    return "products"
+def products_list():
+    products: List[Product] or None = Product.query.all()
+    if len(products) == 0:
+        products = None
+    else:
+        format_pros_and_cons(products)
+
+    return render_template("products_list.html", products=products)
 
 
 @bp.route("/about")

@@ -1,6 +1,7 @@
 @import "nav.css";
 @import "extraction.css";
 @import "error.css";
+@import "products_list.css";
 
 * {
     box-sizing: border-box;
