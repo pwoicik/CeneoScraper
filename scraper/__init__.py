@@ -1,4 +1,5 @@
 import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,9 +24,9 @@ def create_app() -> Flask:
     db.init_app(app)
 
     with app.app_context():
-        db.create_all()
+        from . import ui
+        app.register_blueprint(ui.bp)
 
-    from . import ui
-    app.register_blueprint(ui.bp)
+        db.create_all()
 
     return app
