@@ -1,0 +1,40 @@
+.actions > button {
+    background: none;
+    padding: 0;
+    outline: none;
+    margin-left: 1rem;
+}
+
+.actions > button:hover {
+    cursor: pointer;
+}
+
+.actions svg {
+    width: 25px;
+    height: auto;
+}
+
+.actions svg:last-of-type {
+    width: 20px;
+    height: auto;
+    position: relative;
+    bottom: 0.2rem;
+}
+
+.actions > button.updating > svg {
+    animation: 0.5s linear spin infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}

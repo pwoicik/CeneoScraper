@@ -50,6 +50,8 @@ def product(pid: int) -> Response:
         db.session.add(prod)
         db.session.commit()
 
+    prod = format_pros_and_cons([prod])[0]
+
     return render_template("product.html", product=prod)
 
 

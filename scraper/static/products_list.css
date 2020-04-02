@@ -2,7 +2,7 @@
     align-self: center;
 }
 
-#page-header {
+#products-list #page-header {
     margin-bottom: 1.3rem;
 }
 
@@ -19,55 +19,32 @@
     max-width: 30vw;
 }
 
-.img-col {
+#products-list .img-col {
     padding-right: 2.5rem;
 }
 
-.product-link {
+#products-list .product-link {
     padding-bottom: 2rem;
 }
 
-.score > span {
+#products-list .score > span {
     font-weight: 600;
 }
 
-.list-header {
+#products-list .list-header {
     padding-bottom: 0.5rem;
 }
 
-.pros-list {
+#products-list .pros-list {
     margin-left: 1rem;
     color: forestgreen;
 }
 
-.cons-list {
+#products-list .cons-list {
     margin-left: 1rem;
     color: crimson;
 }
 
-.options {
+#products-list .actions {
     text-align: right;
-}
-
-.options > button {
-    background: none;
-    padding: 0;
-    outline: none;
-    margin-left: 1rem;
-}
-
-.options > button:hover {
-    cursor: pointer;
-}
-
-.download-button > svg {
-    width: 25px;
-    height: auto;
-}
-
-.delete-button > svg {
-    width: 20px;
-    height: auto;
-    position: relative;
-    bottom: 0.2rem;
 }

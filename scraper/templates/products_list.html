@@ -13,6 +13,8 @@
             </style>
 
         {% else %}
+            <script src="{{ url_for("static", filename="action_buttons.js") }}"></script>
+
             <h1 id="page-header">Zapisane produkty:</h1>
             <table>
                 {% for product in products %}
@@ -26,29 +28,17 @@
                             </h2>
                             <h4 class="score">
                                 {% if product.score %}
-                                    <span>ocena:</span> {{ product.score }} / 5
+                                    <span>ocena:</span> {{ product.score }} / 5 <span
+                                    >(na {{ product.reviews|length }} {% if product.reviews|length == 1 %}
+                                        opinię{% else %}opinii{% endif %})
+                                    </span>
                                 {% else %}
                                     Produkt bez oceny
                                 {% endif %}
                             </h4>
                         </td>
-                        <td class="options">
-                            <button
-                                    class="download-button"
-                                    data-pid="{{ product.id }}"
-                                    onclick="downloadProductInfo(this)"
-                                    title="Pobierz w pliku .json"
-                            >
-                                {% include "components/download_icon.html" %}
-                            </button>
-                            <button
-                                    class="delete-button"
-                                    data-pid="{{ product.id }}"
-                                    onclick="sendDeleteRequest(this)"
-                                    title="Usuń produkt z zapisanych"
-                            >
-                                {% include "components/delete_icon.html" %}
-                            </button>
+                        <td class="actions">
+                            {% include "components/action_buttons.html" %}
                         </td>
                     </tr>
                     <tr>
@@ -75,30 +65,6 @@
                     </tr>
                 {% endfor %}
             </table>
-
-            <script>
-                function downloadProductInfo(button) {
-                    const pid = button.getAttribute("data-pid");
-                    fetch(`/db/product/${pid}`)
-                        .then(res => res.json())
-                        .then(json => {
-                            const file = new Blob(
-                                [JSON.stringify(json, null, 4)],
-                                {type: "application/json;charset=utf-8"}
-                            );
-
-                            const virtual_btn = document.createElement('a');
-                            virtual_btn.href = URL.createObjectURL(file);
-                            virtual_btn.download = `${pid}.json`;
-                            virtual_btn.click();
-                        });
-                }
-
-                function sendDeleteRequest(button) {
-                    const pid = button.getAttribute("data-pid");
-                    fetch(`/db/product/${pid}`, {method: "DELETE"}).then(_ => location.reload());
-                }
-            </script>
         {% endif %}
     </div>
 {% endblock %}

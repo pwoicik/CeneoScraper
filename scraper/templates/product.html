@@ -1,8 +1,29 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {{ product.name }}
-    {% for review in product.reviews %}
-        <p>{{ review.__dict__ }}</p>
-    {% endfor %}
+    <div id="product">
+        <script src="{{ url_for("static", filename="action_buttons.js") }}"></script>
+        <script src="{{ url_for("static", filename="product.js") }}"></script>
+
+        <div class="product-image">
+            <img src="{{ product.img_url }}" alt="zdjęcie produktu">
+        </div>
+
+        <h2>{{ product.name }}</h2>
+
+        <h4 class="score">
+            {% if product.score %}
+                <span>ocena:</span> {{ product.score }} / 5 <span
+                >(na {{ product.reviews|length }} {% if product.reviews|length == 1 %}
+                    opinię{% else %}opinii{% endif %})
+                </span>
+            {% else %}
+                Produkt bez oceny
+            {% endif %}
+        </h4>
+
+        <div class="actions">
+            {% include "components/action_buttons.html" %}
+        </div>
+    </div>
 {% endblock %}

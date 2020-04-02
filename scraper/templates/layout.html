@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 {% include "components/top_nav.html" %}
-{% include "components/error_alert.html" %}
+{% if g.error %}
+    {% include "components/error_alert.html" %}
+{% endif %}
 
 <div id="content">
     {% block content %}{% endblock %}
