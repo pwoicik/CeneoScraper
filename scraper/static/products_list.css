@@ -23,6 +23,10 @@
     padding-right: 2.5rem;
 }
 
+.img-col > img {
+    padding-bottom: 3rem;
+}
+
 #products-list .product-link {
     padding-bottom: 2rem;
 }

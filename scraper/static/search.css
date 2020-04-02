@@ -1,0 +1,14 @@
+#search-results {
+    align-self: center;
+}
+
+#search-results > .product-card {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+#search-results .product-info {
+    align-self: center;
+}

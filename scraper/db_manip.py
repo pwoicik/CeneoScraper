@@ -8,8 +8,6 @@ from flask import (
 
 from .extraction import *
 from .models import db, Product
-from .utils import to_json
-
 
 bp = Blueprint("db", __name__, url_prefix="/db")
 
@@ -21,13 +19,13 @@ def remove_product(pid: int) -> Response:
     headers = {"Content-Type": "application/json"}
 
     if request.method == "GET" and product:
-        return make_response(to_json(product), 200, headers)
+        return make_response(jsonify(product.to_dict()), 200, headers)
 
     elif request.method == "PUT":
         if product:
             delete_product(product)
 
-        product = extract(pid)
+        product = extract_product(pid)
         db.session.add(product)
         db.session.commit()
 

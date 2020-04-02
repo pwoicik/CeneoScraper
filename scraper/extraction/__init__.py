@@ -1,18 +1,14 @@
-from bs4 import BeautifulSoup
-from requests import get
+from typing import List
 
+from .utils import get_page, get_reviews, get_products, FoundProduct
 from ..models import Product
-from .utils import get_reviews
+
+__all__ = ["extract_product", "find_products"]
 
 
-__all__ = ["extract"]
-
-
-def extract(pid: int) -> Product:
+def extract_product(pid: int) -> Product:
     url = f"https://www.ceneo.pl/{pid}"
-
-    page_res = get(url)
-    page = BeautifulSoup(page_res.content, "html.parser")
+    page = get_page(f"https://www.ceneo.pl/{pid}")
 
     name = page.select("h1.product-name")[0].text
     img_url = page.select("a.js_image-preview > img")[0]["src"]
@@ -28,3 +24,8 @@ def extract(pid: int) -> Product:
         score=score,
         reviews=list(get_reviews(pid))
     )
+
+
+def find_products(name: str) -> List[FoundProduct]:
+    page = get_page(f"https://www.ceneo.pl/;szukaj-{name};0115-1.htm")
+    return list(get_products(page.select("div.cat-prod-row:not([data-shopurl])")))
