@@ -1,6 +1,8 @@
-@import "nav.css";
-@import "extraction.css";
+@import "action_buttons.css";
 @import "error.css";
+@import "extraction.css";
+@import "nav.css";
+@import "product.css";
 @import "products_list.css";
 
 * {

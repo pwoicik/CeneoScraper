@@ -1,0 +1,21 @@
+<button
+        onclick="updateProductInfo(this)"
+        data-pid="{{ product.id }}"
+        title="Aktualizuj"
+>
+    {% include "components/update_icon.html" %}
+</button>
+<button
+        onclick="downloadProductInfo(this)"
+        data-pid="{{ product.id }}"
+        title="Pobierz jako .json"
+>
+    {% include "components/download_icon.html" %}
+</button>
+<button
+        onclick="deleteProductAndLeave(this)"
+        data-pid="{{ product.id }}"
+        title="Usuń z zapisanych"
+>
+    {% include "components/delete_icon.html" %}
+</button>
