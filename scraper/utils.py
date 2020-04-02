@@ -1,8 +1,6 @@
-from typing import List, Generator, Dict
+from typing import List
 
-from flask import jsonify
-
-from .models import Product, Review
+from .models import Product
 
 
 def format_pros_and_cons(products: List[Product]) -> List[Product]:
@@ -10,8 +8,8 @@ def format_pros_and_cons(products: List[Product]) -> List[Product]:
         pros = []
         cons = []
         for review in prod.reviews:
-            pros_split = review.pros.split("\0")
-            cons_split = review.cons.split("\0")
+            pros_split = review.pros.split("\0") if review.pros else []
+            cons_split = review.cons.split("\0") if review.cons else []
             if len(pros_split) > 0:
                 pros.extend(pros_split)
             if len(cons_split) > 0:
@@ -23,33 +21,3 @@ def format_pros_and_cons(products: List[Product]) -> List[Product]:
         products[i].cons = cons if len(cons) > 0 else None
 
     return products
-
-
-def to_json(product: Product):
-    product_as_dict = {
-        "id": product.id,
-        "name": product.name,
-        "url": product.url,
-        "score": product.score,
-        "reviews": list(reviews_to_dict(product.reviews))
-    }
-
-    return jsonify(product_as_dict)
-
-
-def reviews_to_dict(reviews: List[Review]) -> Generator[Dict, None, None]:
-    for r in reviews:
-        yield {
-            "id": r.id,
-            "author": r.author,
-            "is_recommending": r.is_recommending,
-            "score": r.score,
-            "is_purchase_confirmed": r.is_purchase_confirmed,
-            "issue_date": r.issue_date,
-            "purchase_date": r.purchase_date,
-            "yes_votes": r.yes_votes,
-            "no_votes": r.no_votes,
-            "content": r.content,
-            "pros": r.pros.split("\0"),
-            "cons": r.cons.split("\0"),
-        }

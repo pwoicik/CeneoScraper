@@ -3,7 +3,7 @@
 {% block content %}
     <div id="products-list">
 
-        {% if not products %}
+        {% if products|length < 1 %}
             <h1 id="info-empty-header">Brak zapisanych produktów</h1>
             <style>
                 #products-list {
@@ -24,7 +24,7 @@
                         </td>
                         <td class="product-link">
                             <h2>
-                                <a href="{{ url_for("ui.product", pid=product.id) }}">{{ product.name }}</a>
+                                <a href="{{ url_for("ui.product_view", pid=product.id) }}">{{ product.name }}</a>
                             </h2>
                             <h4 class="score">
                                 {% if product.score %}

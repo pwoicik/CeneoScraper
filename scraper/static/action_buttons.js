@@ -9,7 +9,7 @@ async function updateProductInfo(button) {
 async function downloadProductInfo(button) {
     const pid = button.getAttribute("data-pid");
 
-    const json = fetch(`/db/product/${pid}`).then(res => res.json());
+    const json = await fetch(`/db/product/${pid}`).then(res => res.json());
     const file = new Blob(
         [JSON.stringify(json, null, 4)],
         {type: "application/json;charset=utf-8"}
