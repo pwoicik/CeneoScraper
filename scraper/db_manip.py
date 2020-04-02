@@ -9,7 +9,6 @@ from flask import (
 from .extraction import *
 from .models import db, Product
 
-
 bp = Blueprint("db", __name__, url_prefix="/db")
 
 
@@ -26,7 +25,7 @@ def remove_product(pid: int) -> Response:
         if product:
             delete_product(product)
 
-        product = extract(pid)
+        product = extract_product(pid)
         db.session.add(product)
         db.session.commit()
 

@@ -4,6 +4,7 @@
 @import "nav.css";
 @import "product.css";
 @import "products_list.css";
+@import "search.css";
 
 * {
     box-sizing: border-box;

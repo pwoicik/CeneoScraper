@@ -1,11 +1,16 @@
 from datetime import datetime
 from re import match
-from typing import Generator
+from typing import Generator, List
 
 from bs4 import BeautifulSoup, element
 from requests import get
 
 from ..models import Review
+
+
+def get_page(url: str) -> BeautifulSoup:
+    page_res = get(url)
+    return BeautifulSoup(page_res.content, "html.parser")
 
 
 def get_reviews(pid: int) -> Generator[Review, None, None]:
@@ -71,3 +76,31 @@ def construct_review(review_container: element.Tag) -> Review:
         pros=pros,
         cons=cons
     )
+
+
+class FoundProduct:
+    def __init__(self, product_row: element.Tag):
+        self.id = product_row["data-pid"]
+
+        photo = product_row.select("img")[0]
+        self.name = photo["alt"]
+        self.img_url = photo["src"]
+
+        score = product_row.select(".product-score")
+        if len(score) > 0:
+            score = float(score[0].text.split("/")[0].strip().replace(",", "."))
+        else:
+            score = None
+        self.score = score
+
+        review_count = product_row.select(".product-reviews-link")
+        if len(review_count) > 0:
+            review_count = int(review_count[0].text.split(" ")[0].strip())
+        else:
+            review_count = 0
+        self.reviews_count = review_count
+
+
+def get_products(product_rows: List[element.Tag]) -> Generator[FoundProduct, None, None]:
+    for i in range(4):
+        yield FoundProduct(product_rows[i])

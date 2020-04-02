@@ -1,5 +1,6 @@
 from re import sub
 
+import requests
 from flask import (
     Blueprint,
     g,
@@ -9,12 +10,10 @@ from flask import (
     Response,
     url_for,
 )
-import requests
 
-from . import extraction
+from .extraction import *
 from .models import db, Product
 from .utils import format_pros_and_cons
-
 
 bp = Blueprint("ui", __name__, url_prefix="/")
 
@@ -45,7 +44,7 @@ def extract_view() -> Response:
 def product_view(pid: int) -> Response:
     prod = Product.query.filter(Product.id == pid).first()
     if not prod:
-        prod = extraction.extract(pid)
+        prod = extract_product(pid)
         db.session.add(prod)
         db.session.commit()
 
@@ -60,10 +59,11 @@ def product_view(pid: int) -> Response:
 
 
 @bp.route("/search/<product_name>")
-def search(product_name: str) -> str:
-    product_name = sub(r"\s+", "+", product_name)
-    # products = requests.get(f"https://www.ceneo.pl/;szukaj-{product_name}")
-    return product_name
+def search(product_name: str) -> Response:
+    product_name = sub(r"\s+", "+", product_name.strip())
+    products = find_products(product_name)
+
+    return render_template("search.html", products=products)
 
 
 @bp.route("/products")

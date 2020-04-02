@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div id="search-results">
+        {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.img_url }}" alt="zdjęcie produktu">
+                <div class="product-info">
+                    <h2 class="product-name">
+                        <a href="{{ url_for("ui.product_view", pid=product.id) }}">
+                            {{ product.name }}
+                        </a>
+                    </h2>
+                    <h4 class="product-score">{{ product.score }} / 5 ({{ product.reviews_count }} opinii)</h4>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
