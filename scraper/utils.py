@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from re import match
+from re import match, UNICODE
 from typing import Iterator, List
 
 import plotly.express as px
@@ -100,7 +100,14 @@ def filtered_reviews(reviews: List[dict], filters: str) -> List[dict]:
     for f in filters.split(";"):
         params = f.split(":")
 
-        if match(r"rec:[tf]", f):
+        if match(r"aut:\w+(,\w+)*", f, UNICODE):
+            authors = params[1].split(",")
+            reviews = filter(
+                lambda r: r["author"].lower() in authors,
+                reviews
+            )
+
+        elif match(r"rec:[tf]", f):
             reviews = filter_by_bool(params[1], reviews, "is_recommending")
 
         elif match(r"sco:(([0-5]\.[05]-)|(-[0-5]\.[05])|([0-5]\.[05]-[0-5]\.[05]))", f):
