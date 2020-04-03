@@ -31,16 +31,10 @@ body {
 
 a, a:visited {
     text-decoration: none;
-    color: black;
-}
-
-a:active {
-    position: relative;
-    top: 1px;
+    color: #42b983;
 }
 
 a:hover {
-    color: #42b983;
     cursor: pointer;
 }
 
