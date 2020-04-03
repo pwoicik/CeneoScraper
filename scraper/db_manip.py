@@ -14,7 +14,7 @@ bp = Blueprint("db", __name__, url_prefix="/db")
 
 @bp.route("/product/<int:pid>", methods=["GET", "PUT", "DELETE"])
 def remove_product(pid: int) -> Response:
-    product = Product.query.filter(Product.id == pid).first()
+    product = Product.query.filter_by(id=pid).first()
 
     headers = {"Content-Type": "application/json"}
 

@@ -1,0 +1,113 @@
+#product .product-info {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+#product .product-info > div {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    grid-template-rows: max-content min-content min-content;
+    grid-template-areas: "img name" "img score" "img actions";
+    column-gap: 2rem;
+    row-gap: 0.2rem;
+}
+
+#product .product-image {
+    grid-area: img;
+}
+
+#product .product-info h2 {
+    color: #42b983;
+}
+
+#product .product-score > span {
+    font-weight: 600;
+}
+
+#product .actions {
+    margin: auto 0 0 auto;
+}
+
+#product #charts {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+#product iframe {
+    border: none;
+    display: block;
+    width: 508px;
+    height: 366px;
+}
+
+#product h3 {
+    margin-bottom: 1rem;
+}
+
+#product table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+#product td, #product th {
+    border: 1px solid black;
+    padding: 0.3rem;
+}
+
+#product th {
+    border: 2px solid #4fc08d;
+    border-radius: 20px;
+}
+
+#product .sort-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: none;
+    color: #4fc08d;
+    font-weight: 800;
+}
+
+#product .sort-button[data-curr="r"]::after {
+    margin-left: 0.3rem;
+    content: "⮟"
+}
+
+#product .sort-button[data-curr="y"]::after {
+    margin-left: 0.3rem;
+    content: "⮝"
+}
+
+#product .sort-button:hover {
+    cursor: pointer;
+}
+
+#product .center {
+    text-align: center;
+}
+
+#product .no-wrap {
+    white-space: nowrap;
+}
+
+#product .correct-icon > svg {
+    width: 35px;
+    height: auto;
+}
+
+#product .pros-list {
+    color: cornflowerblue;
+    padding-left: 1rem;
+}
+
+#product .cons-list {
+    color: crimson;
+    padding-left: 1rem;
+}
+
+#product h3 {
+    margin-top: 3rem;
+}

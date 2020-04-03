@@ -1,7 +1,8 @@
-nav {
+#top-nav {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1;
     display: flex;
     height: 50px;
     align-items: center;
@@ -10,16 +11,22 @@ nav {
     transition: 0.5s ease;
 }
 
-nav > a {
+#top-nav > a.nav-link {
+    color: black;
     font-size: 1.1rem;
     margin-left: 1.5rem;
     line-height: 1.8rem;
 }
 
-nav > a:first-of-type {
+#top-nav > a:first-of-type {
     margin-left: auto;
 }
 
-nav > a.active {
+#top-nav a:active {
+    position: relative;
+    top: 1px;
+}
+
+#top-nav > a.active {
     border-bottom: 3px solid #42b983;
 }

@@ -13,7 +13,11 @@ from flask import (
 
 from .extraction import *
 from .models import db, Product
-from .utils import format_pros_and_cons
+from .utils import (
+    format_pros_and_cons,
+    render_reviews_chart,
+    render_score_chart
+)
 
 bp = Blueprint("ui", __name__, url_prefix="/")
 
@@ -49,13 +53,30 @@ def product_view(pid: int) -> Response:
         db.session.commit()
 
     prod = prod.to_dict()
+    reviews = prod["reviews"]
+
+    if "filter" in request.args:
+        pass
 
     if "sort-by" in request.args:
         sort_by = request.args["sort-by"]
-        if sort_by in prod:
-            prod["reviews"].sort(key=lambda r: r[sort_by])
 
-    return render_template("product.html", product=prod)
+        if sort_by in reviews[0]:
+            prod["reviews"] = sorted(
+                reviews,
+                key=lambda r: r[sort_by],
+                reverse="reversed" in request.args,
+            )
+
+    score_chart = render_score_chart(prod)
+    recommendations_chart = render_reviews_chart(prod["reviews"])
+
+    return render_template(
+        "product.html",
+        product=prod,
+        score_chart=score_chart,
+        recommendations_chart=recommendations_chart
+    )
 
 
 @bp.route("/search/<product_name>")

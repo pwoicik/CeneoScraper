@@ -44,7 +44,7 @@ def construct_review(review_container: element.Tag) -> Review:
 
     dates = review_container.select("span.review-time > time")
     issue_date = datetime.fromisoformat(dates[0]["datetime"])
-    purchase_date = datetime.fromisoformat(dates[0]["datetime"])
+    purchase_date = datetime.fromisoformat(dates[1]["datetime"]) if len(dates) > 1 else None
 
     yes_votes = int(review_container.select("button.vote-yes")[0]["data-total-vote"])
     no_votes = int(review_container.select("button.vote-no")[0]["data-total-vote"])

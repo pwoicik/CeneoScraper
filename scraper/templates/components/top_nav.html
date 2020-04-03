@@ -1,23 +1,35 @@
-<nav>
+<nav id="top-nav">
     <h3>Ceneo Scraper</h3>
-    <a href="{{ url_for('ui.index') }}" class="{{ 'active' if request.endpoint == 'ui.index' }}"
-        >Strona główna</a
+    <a
+        href="{{ url_for('ui.index') }}"
+        class="nav-link {{ 'active' if request.endpoint == 'ui.index' }}"
     >
-    <a href="{{ url_for('ui.extract_view') }}" class="{{ 'active' if request.endpoint == 'ui.extract_view' }}"
-        >Ekstrakcja opinii</a
+        Strona główna
+    </a>
+    <a
+        href="{{ url_for('ui.extract_view') }}"
+        class="nav-link {{ 'active' if request.endpoint == 'ui.extract_view' }}"
     >
-    <a href="{{ url_for('ui.products_list') }}" class="{{ 'active' if request.endpoint == 'ui.products_list' }}"
-        >Lista produktów</a
+        Ekstrakcja opinii
+    </a>
+    <a
+        href="{{ url_for('ui.products_list') }}"
+        class="nav-link {{ 'active' if request.endpoint == 'ui.products_list' }}"
     >
-    <a href="{{ url_for('ui.about') }}" class="{{ 'active' if request.endpoint == 'ui.about' }}"
-        >O autorze</a
+        Lista produktów
+    </a>
+    <a
+        href="{{ url_for('ui.about') }}"
+        class="nav-link {{ 'active' if request.endpoint == 'ui.about' }}"
     >
+        O autorze
+    </a>
 </nav>
 
 <script>
     const nav = document.querySelector("nav");
 
-    window.onscroll = function() {
+    window.onscroll = function () {
         nav.style.boxShadow = window.scrollY > 0 ? "1px 1px 6px rgba(0, 0, 0, 0.3)" : "none";
     }
 </script>
