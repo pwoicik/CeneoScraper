@@ -1,4 +1,5 @@
 @import "action_buttons.css";
+@import "double_range_slider.css";
 @import "error.css";
 @import "extraction.css";
 @import "nav.css";
@@ -46,6 +47,11 @@ button {
     color: white;
     font-size: 1rem;
     font-weight: 500;
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 input {

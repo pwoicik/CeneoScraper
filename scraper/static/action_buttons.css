@@ -1,12 +1,7 @@
 .actions > button {
     background: none;
     padding: 0;
-    outline: none;
     margin-left: 1rem;
-}
-
-.actions > button:hover {
-    cursor: pointer;
 }
 
 .actions svg {

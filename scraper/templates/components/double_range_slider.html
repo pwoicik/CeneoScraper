@@ -1,0 +1,39 @@
+<div class="range-slider" id="{{ ss_id }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="double_range_slider.css") }}">
+    <script src="{{ url_for("static", filename="double_range_slider.js") }}"></script>
+
+    <label for="{{ ss_id }}--1" style="display: none;">Od</label>
+    <input
+        type="range"
+        id="{{ ss_id }}--1"
+        class="range-slider-1"
+        name="range-slider-1"
+        min="{{ range[0] }}"
+        max="{{ range[1] }}"
+        step="{{ step }}"
+        value="{{ range[0] }}"
+    >
+
+    <label for="{{ ss_id }}--2" style="display: none;">Do</label>
+    <input
+        type="range"
+        id="{{ ss_id }}--2"
+        class="range-slider-2"
+        name="range-slider-2"
+        min="{{ range[0] }}"
+        max="{{ range[1] }}"
+        step="{{ step }}"
+        value="{{ range[1] }}"
+    >
+</div>
+
+<script>
+    const range = new JSR([".range-slider-1", ".range-slider-2"], {
+        sliders: 2,
+        min: {{ range[0] }},
+        max: {{ range[1] }},
+        step: {{ step }},
+        values: [{{ range[0] }}, {{ range[1] }}],
+        grid: false,
+    });
+</script>
