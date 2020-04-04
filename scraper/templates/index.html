@@ -1,5 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    
+    <div id="index" class="all-text-view">
+        <link rel="stylesheet" href="{{ url_for("static", filename="index.css") }}">
+
+        <h1>Pobierz opinie o downolnym produkcie z Ceneo.</h1>
+        <h2>
+            Ta aplikacja służy do pobierania danych o opiniach produktów z
+            <a class="animated_background-anchor" href="//ceneo.pl">Ceneo.pl</a>
+        </h2>
+        <p>
+            Wyszukaj produkt lub wprowadź jego ID
+            <a class="animated_background-anchor" href="{{ url_for("ui.extract_view") }}">tutaj</a>.
+            Dane o produkcie zostaną dla Ciebie zapisane w bazie danych,
+            której zawartość możesz przeglądać na
+            <a class="animated_background-anchor" href="{{ url_for("ui.products_list") }}">liście produktów</a>.
+            Jeśli chcesz, możesz również pobrać dane w formacie JSON.
+        </p>
+        <p>
+            Opinie prezentowane są w przejrzystej formie. Można je dowolnie filtrować i sortować.
+            Wybrane dane są również reprezentowane w formie wykresów.
+        </p>
+        <p>
+            Autorem aplikacji jest Patryk Wójcik.<br>
+            Została ona napisana w ramach projektu na studia.<br>
+            Cały kod źródłowy dostępny jest w repozytorium
+            <a class="animated_background-anchor" href="//github.com/pwoicik/CeneoScraper">GitHub</a>.
+        </p>
+        <p>
+            Aby dowiedzieć się więcej o procesie technologicznym zastosowanym przy tworzeniu tego projektu
+            zajrzyj na <a class="animated_background-anchor" href="{{ url_for("ui.about") }}">tę stronę</a>.
+        </p>
+    </div>
 {% endblock %}

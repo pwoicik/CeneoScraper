@@ -91,4 +91,4 @@ def products_list():
 
 @bp.route("/about")
 def about():
-    return "about"
+    return render_template("about.html")

@@ -1,4 +1,6 @@
 <nav id="top-nav">
+    <link rel="stylesheet" href="{{ url_for("static", filename="nav.css") }}">
+
     <h3>Ceneo Scraper</h3>
     <a
         href="{{ url_for('ui.index') }}"
@@ -22,7 +24,7 @@
         href="{{ url_for('ui.about') }}"
         class="nav-link {{ 'active' if request.endpoint == 'ui.about' }}"
     >
-        O autorze
+        O projekcie
     </a>
 </nav>
 

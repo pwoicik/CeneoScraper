@@ -1,0 +1,22 @@
+.all-text-view {
+    min-width: 800px;
+    width: 50%;
+    margin: auto 0 auto 4rem;
+}
+
+.all-text-view h1, .all-text-view h2, .all-text-view p {
+    margin-bottom: 1.5rem;
+}
+
+.all-text-view h1 {
+    font-size: 2.5rem;
+}
+
+.all-text-view h2 {
+    font-size: 1.8rem;
+}
+
+.all-text-view p {
+    font-size: 1.5rem;
+    font-weight: 400;
+}

@@ -2,6 +2,8 @@
 
 {% block content %}
     <div id="search-results">
+        <link rel="stylesheet" href="{{ url_for("static", filename="search.css") }}">
+
         {% for product in products %}
             <div class="product-card">
                 <img src="{{ product.img_url }}" alt="zdjęcie produktu">
