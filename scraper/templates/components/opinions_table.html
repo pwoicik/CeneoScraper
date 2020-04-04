@@ -107,15 +107,15 @@
         <tr id="{{ review.id }}">
             <td>{{ review.author }}</td>
             <td class="correct-icon center">
-                {% with bool = review.is_recommending %}
+                {% if review.is_recommending %}
                     {% include "components/icons/correct_icon.html" %}
-                {% endwith %}
+                {% endif %}
             </td>
             <td class="center">{{ review.score }} / 5</td>
             <td class="correct-icon center">
-                {% with bool = review.is_purchase_confirmed %}
+                {% if review.is_purchase_confirmed %}
                     {% include "components/icons/correct_icon.html" %}
-                {% endwith %}
+                {% endif %}
             </td>
             <td class="center no-wrap">{{ review.issue_date.date() }}</td>
             <td class="center no-wrap">
