@@ -81,7 +81,7 @@ def search(product_name: str) -> Response:
 
 
 @bp.route("/products")
-def products_list():
+def products_list() -> Response:
     products = Product.query.all()
     format_pros_and_cons(products)
     products.sort(key=lambda x: x.name)
@@ -90,5 +90,5 @@ def products_list():
 
 
 @bp.route("/about")
-def about():
+def about() -> Response:
     return render_template("about.html")

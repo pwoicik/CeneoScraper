@@ -2,11 +2,41 @@
 
 {% block content %}
     <div id="about" class="all-text-view">
-        <link rel="stylesheet" href="{{ url_for("static", filename="index.css") }}">
+        <link rel="stylesheet" href="{{ url_for("static", filename="style/index.css") }}">
 
         <h1>
             Stworzony w Pythonie za pomocą
-            <a class="animated_background-anchor" href="//flask.palletsprojects.com/">Flaska</a>
+            <a class="animated_background-anchor" href="//flask.palletsprojects.com/">Flaska</a>.
         </h1>
+        <h2>CSS i JS bez żadnych frameworków.</h2>
+        <p>
+            Pobieranie danych za pomocą biblioteki
+            <a class="animated_background-anchor" href="//requests.readthedocs.io/en/master/">requests</a>,
+            które następnie są parsowane z wykorzystaniem
+            <a class="animated_background-anchor" href="//www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a>.
+        </p>
+        <p>
+            Zastosowano relacyjną bazę danych SQLite, oraz ORM
+            <a class="animated_background-anchor" href="//flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy</a>.
+        </p>
+        <p>
+            Wykresy generowane jako interaktywny HTML za pomocą biblioteki
+            <a class="animated_background-anchor" href="//plotly.com/python/">Plotly</a>,
+            z danych reprezentowanych z pomącą struktury DataFrame z biblioteki
+            <a class="animated_background-anchor" href="//pandas.pydata.org/">pandas</a>,
+            wstawiane na stronę w tagu iframe.
+        </p>
+        <p>
+            HTML generowany przy użyciu silnika szablonów
+            <a class="animated_background-anchor" href="//jinja.palletsprojects.com">Jinja2</a>.
+        </p>
+        <p>
+            Wszystkie ikony użyte na stronie wykonał
+            <a class="animated_background-anchor" href="//www.flaticon.com/authors/freepik">Freepik</a>
+            i zostały one pobrane ze strony
+            <a class="animated_background-anchor" href="//www.flaticon.com/">flaticon.com</a>.
+            W menu filtrowania opinii zastosowano element wizualny
+            <a class="animated_background-anchor" href="//github.com/soanvig/jsr">M&M JS Range</a>.
+        </p>
     </div>
 {% endblock %}

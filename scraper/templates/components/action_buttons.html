@@ -1,24 +1,24 @@
-<script src="{{ url_for("static", filename="action_buttons.js") }}"></script>
-<link rel="stylesheet" href="{{ url_for("static", filename="action_buttons.css") }}">
+<script src="{{ url_for("static", filename="script/action_buttons.js") }}"></script>
+<link rel="stylesheet" href="{{ url_for("static", filename="style/action_buttons.css") }}">
 
 <button
         onclick="updateProductInfo(this)"
         data-pid="{{ product.id }}"
         title="Aktualizuj"
 >
-    {% include "components/update_icon.html" %}
+    {% include "components/icons/update_icon.html" %}
 </button>
 <button
         onclick="downloadProductInfo(this)"
         data-pid="{{ product.id }}"
         title="Pobierz jako .json"
 >
-    {% include "components/download_icon.html" %}
+    {% include "components/icons/download_icon.html" %}
 </button>
 <button
         onclick="deleteProductAndLeave(this)"
         data-pid="{{ product.id }}"
         title="Usuń z zapisanych"
 >
-    {% include "components/delete_icon.html" %}
+    {% include "components/icons/delete_icon.html" %}
 </button>
