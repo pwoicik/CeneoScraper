@@ -172,7 +172,7 @@ def filter_by_date(xrange: List[str], collection: List[dict], attr: str) -> Iter
     to = date.fromisoformat(to) if len(to) > 0 else date.today()
 
     return filter(
-        lambda r: fr <= r[attr] <= to,
+        lambda r: fr <= r[attr].date() <= to,
         collection
     )
 

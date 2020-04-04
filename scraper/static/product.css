@@ -46,6 +46,17 @@
     margin-bottom: 1rem;
 }
 
+#product #table-header {
+    display: flex;
+    align-items: baseline;
+}
+
+#product #filter-button {
+    margin-left: auto;
+    padding: 0.5rem 1rem 0.7rem;
+    height: 2.2rem;
+}
+
 #product table {
     display: block;
     overflow-x: auto;
@@ -81,10 +92,6 @@
     content: "⮝"
 }
 
-#product .sort-button:hover {
-    cursor: pointer;
-}
-
 #product .center {
     text-align: center;
 }
@@ -110,4 +117,111 @@
 
 #product h3 {
     margin-top: 3rem;
+}
+
+#product #filters {
+    position: fixed;
+    top: 100vh;
+    left: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    padding: calc(2rem + 50px) 1rem 2rem;
+    background-color: rgba(251, 251, 251, 0.5);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: 0.5s ease-in-out opacity;
+}
+
+#product #filters.show-filters {
+    opacity: 1;
+    top: 0;
+    left: 0;
+}
+
+#product #close-filters-button {
+    background: none;
+    padding: 0;
+    width: 30px;
+    height: auto;
+    margin: 0 2rem 0 auto;
+}
+
+#product #filters form {
+    padding: 1rem 2rem;
+    max-width: 85%;
+    width: 700px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#product #filters label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+#product #filters input {
+    margin-bottom: 2.5rem;
+}
+
+#product #filters input {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    width: 30rem;
+    color: #333333;
+    border-bottom: 2px solid #7e7e7e;
+}
+
+#product #filters input::placeholder {
+    text-align: center;
+}
+
+#product .radios-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+#product #filters label[for="recommendation-input"] {
+    margin-bottom: 1.5rem;
+}
+
+#product #filters label[for="purchase-confirmed-input"] {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#product #filters input[type="radio"] {
+    margin-bottom: 1rem;
+    width: 25px;
+    height: 25px;
+}
+
+#product #filters input[type="radio"] + label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+#product #score-slider {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#product #filters .double-text-input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#product #filters .double-text-input-container > label {
+    display: none;
+}
+
+#product #filters .double-text-input-container > input {
+    width: 45%;
 }

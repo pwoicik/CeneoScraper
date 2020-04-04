@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <script src="{{ url_for("static", filename="product.js") }}"></script>
+    <link rel="stylesheet" href="{{ url_for("static", filename="product.css") }}">
+
     <div id="product">
-        <script src="{{ url_for("static", filename="action_buttons.js") }}"></script>
-        <script src="{{ url_for("static", filename="product.js") }}"></script>
 
         <section class="product-info">
             <div>
@@ -35,7 +36,10 @@
             <iframe id="recommendations-chart" srcdoc="{{ recommendations_chart }}"></iframe>
         </section>
 
-        <h3>Opinie:</h3>
+        <div id="table-header">
+            <h3>Opinie:</h3>
+            <button id="filter-button">Filtruj</button>
+        </div>
         <table>
             <thead>
             <tr>
@@ -184,5 +188,150 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <div id="filters">
+            <button id="close-filters-button">
+                {% include "components/delete_icon.html" %}
+            </button>
+
+            <form>
+                <label for="filter-author-input">Autorzy</label>
+                <input
+                        id="filter-author-input"
+                        type="text"
+                        placeholder="lista autorów rozdzielonych przecinkami"/>
+
+                <label for="recommendation-input">Rekomendacja</label>
+                <div id="recommendation-input" class="radios-container">
+                    <div class="radio">
+                        <input id="rec-no" type="radio" name="recommendation-radio" value="f"/>
+                        <label for="rec-no">Tylko bez</label>
+                    </div>
+                    <div class="radio">
+                        <input id="rec-none" type="radio" name="recommendation-radio" value="" checked/>
+                        <label for="rec-none">Wszystkie</label>
+                    </div>
+                    <div class="radio">
+                        <input id="rec-yes" type="radio" name="recommendation-radio" value="t"/>
+                        <label for="rec-yes">Tylko z</label>
+                    </div>
+                </div>
+
+                <label for="score-slider">Ocena</label>
+                {% with ss_id = "score-slider", range = [0, 5], step = 0.5 %}
+                    {% include "components/double_range_slider.html" %}
+                {% endwith %}
+
+                <label for="purchase-confirmed-input">Potwierdzona zakupem</label>
+                <div id="purchase-confirmed-input" class="radios-container">
+                    <div class="radio">
+                        <input id="pc-no" type="radio" name="pc-conf-radio" value="f"/>
+                        <label for="pc-no">Tylko bez</label>
+                    </div>
+                    <div class="radio">
+                        <input id="pc-none" type="radio" name="pc-conf-radio" value="" checked/>
+                        <label for="pc-none">Wszystkie</label>
+                    </div>
+                    <div class="radio">
+                        <input id="pc-yes" type="radio" name="pc-conf-radio" value="t"/>
+                        <label for="pc-yes">Tylko z</label>
+                    </div>
+                </div>
+
+                <label for="issue-date-input">Data wystawienia</label>
+                <div id="issue-date-input" class="double-text-input-container">
+                    <label for="issue-date-from">od</label>
+                    <input id="issue-date-from" type="date"> - <input id="issue-date-to" type="date">
+                    <label for="issue-date-to">do</label>
+                </div>
+
+                <label for="purchase-date-input">Data zakupu</label>
+                <div id="purchase-date-input" class="double-text-input-container">
+                    <label for="purchase-date-from">od</label>
+                    <input id="purchase-date-from" type="date"> - <input id="purchase-date-to" type="date">
+                    <label for="purchase-date-to">do</label>
+                </div>
+
+                <label for="yes-votes-input">Głosy pozytywne</label>
+                <div id="yes-votes-input" class="double-text-input-container">
+                    <label for="yes-votes-from">od</label>
+                    <input
+                        id="yes-votes-from"
+                        type="number"
+                        placeholder="Min"
+                    > - <input
+                        id="yes-votes-to"
+                        type="number"
+                        placeholder="Max"
+                    >
+                    <label for="yes-votes-to">do</label>
+                </div>
+
+                <label for="no-votes-input">Głosy pozytywne</label>
+                <div id="no-votes-input" class="double-text-input-container">
+                    <label for="no-votes-from">od</label>
+                    <input
+                        id="no-votes-from"
+                        type="number"
+                        placeholder="Min"
+                    > - <input
+                        id="no-votes-to"
+                        type="number"
+                        placeholder="Max"
+                    >
+                    <label for="no-votes-to">do</label>
+                </div>
+
+                <label for="content-input">Treść</label>
+                <div id="content-input" class="radios-container">
+                    <div class="radio">
+                        <input id="content-no" type="radio" name="content-radio" value="f"/>
+                        <label for="content-no">Tylko bez</label>
+                    </div>
+                    <div class="radio">
+                        <input id="content-none" type="radio" name="content-radio" value="" checked/>
+                        <label for="content-none">Wszystkie</label>
+                    </div>
+                    <div class="radio">
+                        <input id="content-yes" type="radio" name="content-radio" value="t"/>
+                        <label for="content-yes">Tylko z</label>
+                    </div>
+                </div>
+
+                <label for="pros-input">Zalety</label>
+                <div id="pros-input" class="radios-container">
+                    <div class="radio">
+                        <input id="pros-no" type="radio" name="pros-radio" value="f"/>
+                        <label for="pros-no">Tylko bez</label>
+                    </div>
+                    <div class="radio">
+                        <input id="pros-none" type="radio" name="pros-radio" value="" checked/>
+                        <label for="pros-none">Wszystkie</label>
+                    </div>
+                    <div class="radio">
+                        <input id="pros-yes" type="radio" name="pros-radio" value="t"/>
+                        <label for="pros-yes">Tylko z</label>
+                    </div>
+                </div>
+
+                <label for="cons-input">Wady</label>
+                <div id="cons-input" class="radios-container">
+                    <div class="radio">
+                        <input id="cons-no" type="radio" name="cons-radio" value="f"/>
+                        <label for="cons-no">Tylko bez</label>
+                    </div>
+                    <div class="radio">
+                        <input id="cons-none" type="radio" name="cons-radio" value="" checked/>
+                        <label for="cons-none">Wszystkie</label>
+                    </div>
+                    <div class="radio">
+                        <input id="cons-yes" type="radio" name="cons-radio" value="t"/>
+                        <label for="cons-yes">Tylko z</label>
+                    </div>
+                </div>
+
+                <button>Zastosuj</button>
+            </form>
+        </div>
     </div>
 {% endblock %}

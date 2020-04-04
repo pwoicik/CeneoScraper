@@ -16,11 +16,3 @@
     transform: rotate(45deg) scale(2.2, 2.2);
     color: black;
 }
-
-#error-alert > button:hover {
-    cursor: pointer;
-}
-
-#error-alert > button:focus {
-    outline: none;
-}

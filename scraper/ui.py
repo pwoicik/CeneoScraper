@@ -55,7 +55,11 @@ def product_view(pid: int) -> Response:
         prod["reviews"] = filtered_reviews(reviews, request.args["filters"])
 
     if "sort-by" in request.args:
-        prod["reviews"] = sorted_reviews(reviews, request.args["sort-by"], "reversed" in request.args)
+        prod["reviews"] = sorted_reviews(
+            reviews,
+            request.args["sort-by"],
+            reverse="reversed" in request.args
+        )
 
     score_chart = render_score_chart(prod)
     recommendations_chart = render_reviews_chart(prod["reviews"])
@@ -87,4 +91,4 @@ def products_list():
 
 @bp.route("/about")
 def about():
-    return "about"
+    return render_template("about.html")
