@@ -1,0 +1,148 @@
+<table>
+    <thead>
+    <tr>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="author"
+                    data-curr="{% if request.args["sort-by"] != "author" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Autor
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="is_recommending"
+                    data-curr="{% if request.args["sort-by"] != "is_recommending" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Rekomendacja
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="score"
+                    data-curr="{% if request.args["sort-by"] != "score" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Ocena
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="is_purchase_confirmed"
+                    data-curr="{% if request.args["sort-by"] != "is_purchase_confirmed" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Potwierdzona zakupem
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="issue_date"
+                    data-curr="{% if request.args["sort-by"] != "issue_date" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Wystawiona
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="purchase_date"
+                    data-curr="{% if request.args["sort-by"] != "purchase_date" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Zakupiono
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="yes_votes"
+                    data-curr="{% if request.args["sort-by"] != "yes_votes" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Głosy pozytywne
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="no_votes"
+                    data-curr="{% if request.args["sort-by"] != "no_votes" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Głosy negatywne
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="content"
+                    data-curr="{% if request.args["sort-by"] != "content" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Treść
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="pros"
+                    data-curr="{% if request.args["sort-by"] != "pros" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Zalety
+            </button>
+        </th>
+        <th>
+            <button
+                    class="sort-button"
+                    data-attr="cons"
+                    data-curr="{% if request.args["sort-by"] != "cons" %}n{% elif "reversed" in  request.args %}r{% else %}y{% endif %}"
+            >
+                Wady
+            </button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for review in product.reviews %}
+        <tr id="{{ review.id }}">
+            <td>{{ review.author }}</td>
+            <td class="correct-icon center">
+                {% with bool = review.is_recommending %}
+                    {% include "components/icons/correct_icon.html" %}
+                {% endwith %}
+            </td>
+            <td class="center">{{ review.score }} / 5</td>
+            <td class="correct-icon center">
+                {% with bool = review.is_purchase_confirmed %}
+                    {% include "components/icons/correct_icon.html" %}
+                {% endwith %}
+            </td>
+            <td class="center no-wrap">{{ review.issue_date.date() }}</td>
+            <td class="center no-wrap">
+                {% if review.purchase_date %}
+                    {{ review.purchase_date.date() }}
+                {% else %}
+                    ———
+                {% endif %}
+            </td>
+            <td class="center">{{ review.yes_votes }}</td>
+            <td class="center">{{ review.no_votes }}</td>
+            <td>{{ review.content }}</td>
+            <td>
+                <ul class="pros-list">
+                    {% for pro in review.pros %}
+                        <li>{{ pro }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul class="cons-list">
+                    {% for con in review.cons %}
+                        <li>{{ con }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

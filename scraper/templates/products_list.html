@@ -2,7 +2,7 @@
 
 {% block content %}
     <div id="products-list">
-        <link rel="stylesheet" href="{{ url_for("static", filename="products_list.css") }}">
+        <link rel="stylesheet" href="{{ url_for("static", filename="style/products_list.css") }}">
 
         {% if products|length < 1 %}
             <h1 id="info-empty-header">Brak zapisanych produktów</h1>

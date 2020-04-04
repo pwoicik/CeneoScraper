@@ -38,7 +38,7 @@ def remove_product(pid: int) -> Response:
     return make_response(jsonify({"status": "couldn't find product"}), 400, headers)
 
 
-def delete_product(product: Product):
+def delete_product(product: Product) -> None:
     for review in product.reviews:
         db.session.delete(review)
     db.session.delete(product)
