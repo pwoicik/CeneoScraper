@@ -1,6 +1,5 @@
 from re import sub
 
-import requests
 from flask import (
     Blueprint,
     g,
@@ -11,7 +10,9 @@ from flask import (
     url_for,
 )
 
+from .charts import *
 from .extraction import *
+from .filtering import *
 from .models import db, Product
 from .utils import *
 
@@ -26,14 +27,12 @@ def index() -> Response:
 @bp.route("/extract")
 def extract_view() -> Response:
     if "id" in request.args:
-        pid = int(request.args["id"])
-        url = f"https://www.ceneo.pl/{pid}"
-        product_req = requests.get(url)
+        pid = request.args["id"]
 
-        if product_req.status_code == 404:
-            g.error = "Nie znaleziono przedmiotu o podanym ID"
+        if check_if_page_exists(f"https://www.ceneo.pl/{pid}"):
+            return redirect(url_for("ui.product_view", pid=int(pid)))
         else:
-            return redirect(url_for("ui.product_view", pid=pid))
+            g.error = "Nie znaleziono przedmiotu o podanym ID"
     elif "name" in request.args:
         return redirect(url_for("ui.search", product_name=request.args["name"]))
 
@@ -49,14 +48,13 @@ def product_view(pid: int) -> Response:
         db.session.commit()
 
     prod = prod.to_dict()
-    reviews = prod["reviews"]
 
     if "filters" in request.args:
-        prod["reviews"] = filtered_reviews(reviews, request.args["filters"])
+        prod["reviews"] = filtered_reviews(prod["reviews"], request.args["filters"])
 
     if "sort-by" in request.args:
         prod["reviews"] = sorted_reviews(
-            reviews,
+            prod["reviews"],
             request.args["sort-by"],
             reverse="reversed" in request.args
         )
