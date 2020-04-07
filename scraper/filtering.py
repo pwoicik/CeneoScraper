@@ -78,13 +78,13 @@ def filter_by_num(xrange: List[str], collection: List[dict], attr: str) -> Itera
 
 
 def filter_by_date(xrange: List[str], collection: List[dict], attr: str) -> Iterator[dict]:
-    fr = xrange[0]
-    fr = date.fromisoformat(fr) if len(fr) > 0 else date(1, 1, 1)
-    to = xrange[1]
-    to = date.fromisoformat(to) if len(to) > 0 else date.today()
+    fr = date.fromisoformat(xrange[0])
+    fr = fr if fr else date(1, 1, 1)
+    to = date.fromisoformat(xrange[1])
+    to = to if to else date.today()
 
     return filter(
-        lambda r: fr <= r[attr].date() <= to,
+        lambda r: fr <= r[attr].date() <= to if r[attr] else False,
         collection
     )
 
